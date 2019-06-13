@@ -25,8 +25,208 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>Git Best Practices</h1>
+				</section>
+				<section>
+					<section>
+						<h2>Commit Related Changes</h2>
+					</section>
+					<section>
+						<p>A commit should be a wrapper for related changes.</p>
+					</section>
+					<section>
+						<pre>$ git add -p</pre>
+					</section>
+					<section>
+						<p>-p, --patch Use the interactive patch selection interface to chose which changes to commit.
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Commit Often</h2>
+					</section>
+					<section>
+						<p>keeps your commits small and, again, helps you commit only related changes.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Rebase Often</h2>
+					</section>
+					<section>
+						<p>keep your local working branch updated.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Don’t Commit Half-Done Work</h2>
+					</section>
+					<section>
+						<p>You should only commit code when it’s completed.</p>
+						<p>If super big feature - split the feature’s implementation into logical chunks and remember to commit early and often.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Test Before You Commit</h2>
+					</section>
+					<section>
+						<p>Test your code thoroughly to make sure it really is completed and has no side effects.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Write Good Commit Messages</h2>
+					</section>
+					<section>
+						<p>Use the imperative, present tense ("change", not "changed" or "changes") to be consistent with generated messages from commands like git merge.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Use Branches</h2>
+					</section>
+					<section>
+						<p>Neither use master nor develop when developing.</p>
+						<p>Always create new branch when starting new feature.</p>
+						<pre>$ git branch RT-1234 origin/master</pre>
+						<pre>$ git branch feature/RT-1234 origin/master</pre>
+						<pre>$ git checkout -b feature/RT-1234 origin/master</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Be Explicit</h2>
+					</section>
+					<section>
+						<pre>$ git push</pre>
+					</section>
+					<section>
+						<pre>$ git push</pre>
+						<p>vs.</p>
+						<pre>$ git push origin my-local-branch</pre>
+					</section>
+					<section>
+						<pre>$ git push --force</pre>
+					</section>
+					<section>
+						<pre>$ git push --force</pre>
+						<p>vs.</p>
+						<pre>$ git push origin my-local-branch --force</pre>
+					</section>
+					<section>
+						<pre>--force</pre>
+						<p>vs.</p>
+						<pre>--force-with-lease</pre>
+					</section>
+					<section>
+						<pre>$ git push origin my-local-branch --force-with-lease</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Merging vs. Rebasing</h1>
+					</section>
+					<section>
+						<pre>$ git pull</pre>
+						<h5>vs.</h5>
+						<pre>$ git rebase</pre>
+					</section>
+					<section>
+						<img data-src="/images/01.svg">
+					</section>
+					<section>
+						<pre>$ git fetch origin master</pre>
+						<pre>$ git merge origin/master</pre>
+					</section>
+					<section>
+						<img data-src="/images/02.svg">
+					</section>
+					<section>
+						<pre>$ git fetch origin master</pre>
+						<pre>$ git rebase origin/master</pre>
+					</section>
+					<section>
+						<img data-src="/images/03.svg">
+					</section>
+					<section>
+						<pre>$ git pull origin master --rebase</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Rewriting History</h1>
+					</section>
+					<section>
+						<pre>$ git commit --amend</pre>
+					</section>
+					<section>
+						<pre>$ git rebase -i HEAD~4</pre>
+					</section>
+					<section>
+						<pre>
+pick 07c5abd add login page
+pick de9b1eb patch login page
+pick 3e7ee36 some typosssss
+pick fa20af3 fix something
+
+# Rebase 8db7e8b..fa20af3 onto 8db7e8b
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+						</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Other Useful Commands</h1>
+					</section>
+					<section>
+						<pre>$ git cherry-pick commit-hash</pre>
+					</section>
+					<section>
+						<pre>$ git reset</pre>
+						<pre>$ git reset --hard HEAD~1</pre>
+						<pre>$ git reset --soft HEAD~1</pre>
+						<pre>$ git reset --mixed HEAD~1</pre>
+					</section>
+					<section>
+						<pre>$ git diff</pre>
+						<pre>$ git diff --staged</pre>
+					</section>
+					<section>
+						<pre>$ git stash</pre>
+						<pre>$ git stash save "name"</pre>
+						<hr>
+						<pre>$ git stash list</pre>
+						<hr>
+						<pre>$ git stash pop</pre>
+						<pre>$ git stash pop stash@{2}</pre>
+						<pre>$ git stash apply</pre>
+					</section>
+					<section>
+						<pre>$ git reflog</pre>
+						<pre>$ git reset HEAD@{2}</pre>
+					</section>
+				</section>
+				<section>
+					<h1>Thanks!</h1>
+				</section>
 			</div>
 		</div>
 
